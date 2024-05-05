@@ -26,14 +26,14 @@ public class UserService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
 
 
-    public Optional<User> findByUsername(String username) {
+    public Optional<User> getByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(
+        User user = getByUsername(username).orElseThrow(() -> new UsernameNotFoundException(
                 String.format("User '%s' not found", username)
         ));
 
@@ -55,7 +55,7 @@ public class UserService implements UserDetailsService {
         UserProfile profile = new UserProfile();
         profile.setFirstName(userRegistrationDto.getFirstName());
         profile.setSecondName(userRegistrationDto.getSecondName());
-        profile.setCity(cityService.findByName(userRegistrationDto.getCity()).orElseThrow());
+        profile.setCity(cityService.getByName(userRegistrationDto.getCity()).orElseThrow());
 
         user.setRoles(List.of(roleService.getUserRole().orElseThrow()));
 

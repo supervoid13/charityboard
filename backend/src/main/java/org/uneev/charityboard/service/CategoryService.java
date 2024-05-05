@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.uneev.charityboard.entity.Category;
 import org.uneev.charityboard.repository.CategoryRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -12,7 +13,11 @@ import java.util.Optional;
 public class CategoryService {
     private final CategoryRepository categoryRepository;
 
-    public Optional<Category> findByName(String name) {
+    public Optional<Category> getByName(String name) {
         return categoryRepository.findByName(name);
+    }
+    
+    public List<Category> getAll() {
+        return (List<Category>) categoryRepository.findAll();
     }
 }

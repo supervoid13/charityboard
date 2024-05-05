@@ -19,10 +19,10 @@ public class CommentService {
         Comment comment = new Comment();
         comment.setContent(commentDto.getContent());
 
-        Post post = postService.findById(id).orElseThrow();
+        Post post = postService.getById(id).orElseThrow();
         comment.setPost(post);
 
-        User user = userService.findByUsername(username).orElseThrow();
+        User user = userService.getByUsername(username).orElseThrow();
         comment.setAuthor(user.getProfile());
 
         commentRepository.save(comment);

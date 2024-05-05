@@ -30,14 +30,14 @@ public class PostController {
 
     @GetMapping("")
     public List<PostResponseDto> getAllPosts() {
-        List<Post> posts = postService.getAllPosts();
+        List<Post> posts = postService.getAll();
 
         return modelMapper.map(posts, new TypeToken<List<PostResponseDto>>(){}.getType());
     }
 
     @GetMapping("/{id}")
     public PostResponseDto getPostById(@PathVariable long id) {
-        Optional<Post> post = postService.findById(id);
+        Optional<Post> post = postService.getById(id);
         if (post.isEmpty()) {
             throw new NoSuchPostException(
                     String.format("No post with id '%d'", id)

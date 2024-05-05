@@ -29,7 +29,7 @@ public class AuthService {
     }
 
     public void createUser(UserRegistrationDto userRegistrationDto) {
-        if (userService.findByUsername(userRegistrationDto.getUsername()).isPresent())
+        if (userService.getByUsername(userRegistrationDto.getUsername()).isPresent())
             throw new UsernameAlreadyExistException(
                     String.format("Username '%s' is already taken", userRegistrationDto.getUsername())
             );

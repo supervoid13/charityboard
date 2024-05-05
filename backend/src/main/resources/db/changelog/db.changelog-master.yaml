@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changeset/init-db.sql
+  - include:
+      file: db/changelog/changeset/insert.sql
+  - include:
+      file: db/changelog/changeset/insert-2.sql
+  - include:
+      file: db/changelog/changeset/insert-userprofiles.sql

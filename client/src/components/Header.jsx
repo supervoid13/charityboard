@@ -23,6 +23,7 @@ export default function Header() {
                     </span>
                 </div>
                 </Link>
+                
                 <div className='signs'>
                     <Link style={{ textDecoration: 'none' }}><Button variant="filled" color="orange" size="md" >SIGN UP</Button></Link>
                     <Link style={{ textDecoration: 'none' }}><Button variant="default" color="gray" style={{"margin-left": "5px"}}>SIGN IN</Button></Link>

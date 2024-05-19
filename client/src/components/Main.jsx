@@ -2,6 +2,7 @@ import React from 'react';
 import Header from "./Header";
 import pic from "../assets/dw.jpeg";
 import arrow from '../assets/navigate.png';
+import { Outlet, Link } from "react-router-dom";
 export default function Main() {
   return (
     <div className="main-container">
@@ -15,10 +16,12 @@ export default function Main() {
         <div className='minip'>
             <p>On this platform you can give money to the people!</p>
         </div>
-        <div className='goto'>
-            <img src={arrow} width="50"></img>
-            <p className='myp'>Go check posts!</p>
-        </div>
+        <Link style={{ textDecoration: 'none' }}>
+            <div className='goto'>
+                <img src={arrow} width="50"></img>
+                <p className='myp'>Go check posts!</p>
+            </div>
+        </Link>
       </div>
     </div>
   );

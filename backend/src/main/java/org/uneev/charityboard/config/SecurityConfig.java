@@ -40,6 +40,7 @@ public class SecurityConfig {
                 configuration.setAllowedOrigins(List.of("*"));
                 configuration.setAllowedMethods(List.of("*"));
                 configuration.setAllowedHeaders(List.of("*"));
+                configuration.setAllowCredentials(true);
                 return configuration;
             }))
                 .csrf(AbstractHttpConfigurer::disable)

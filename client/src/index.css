@@ -109,3 +109,48 @@ body {
     font-weight: 600;
     font-size: larger;
   }
+
+  .second-main{
+    margin-top: 16rem;
+    display: flex;
+    justify-content: center;
+  }
+  .orange-block{
+    background-color: #ff5001;
+    height: 575px;
+    width: 500px;
+    display: flex;
+  }
+  .try{
+    font-size: 45px !important;
+    font-weight: 700;
+    color: white !important;
+  }
+  .text-in-or{
+    margin-left: 4rem;  
+    margin-top: 5rem;  
+  }
+  .buth{
+    margin-left: 4rem; 
+    margin-top: 4rem; 
+  }
+  .footer{
+    background-color: #f6f6f6;
+    height: 15rem;
+    margin-top: 9rem;
+    display: flex !important;
+    justify-content: space-between;
+  }
+  .some-texts{
+    font-weight: 600;
+    font-size: 20px;
+    display: flex !important;
+    flex-direction: column;
+    margin-left: 7rem;
+  }
+  .spa{
+    margin-top: 1rem;
+  }
+  .logo-at-b{
+    margin-right: 1rem;
+  }

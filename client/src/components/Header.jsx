@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '../assets/Artboard 1@3x.png';
+
 import { Outlet, Link } from "react-router-dom";
 import { Button } from '@mantine/core';
 

@@ -8,7 +8,7 @@ export default function Header() {
   return (
     <>
         <div className='header'>
-            <img src={logo} height="85px" className='logo'></img>
+            <Link to={"/"}><img src={logo} height="85px" className='logo'></img></Link>
             <div className='texts'>
                 <Link style={{ textDecoration: 'none' }}>
                 <div className='link'>
@@ -26,12 +26,11 @@ export default function Header() {
                 </Link>
                 
                 <div className='signs'>
-                    <Link style={{ textDecoration: 'none' }}><Button variant="filled" color="orange" size="md" >SIGN UP</Button></Link>
-                    <Link style={{ textDecoration: 'none' }}><Button variant="default" color="gray" style={{"margin-left": "5px"}}>SIGN IN</Button></Link>
+                    <Link to={`/signup`} style={{ textDecoration: 'none' }}><Button variant="filled" color="orange" size="md" >SIGN UP</Button></Link>
+                    <Link to={`/signin`} style={{ textDecoration: 'none' }}><Button variant="default" color="gray" style={{"margin-left": "5px"}}>SIGN IN</Button></Link>
                 </div>
             </div>
         </div>
-        
     </>
   );
 }

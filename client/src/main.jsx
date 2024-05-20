@@ -4,7 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import '@mantine/core/styles.css';
 import { Provider } from 'react-redux'
-import store from './store'
+import {store} from './store'
 import AuthenticationTitle from './components/Auth.jsx'
 import Register from './components/Register.jsx'
 import {

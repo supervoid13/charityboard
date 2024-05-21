@@ -48,12 +48,12 @@ import {
         </Text>
   
         <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-          <TextInput label="Email" placeholder="you@mantine.dev" required onChange={e => handleChange("email", e.target.value)} value={fields['email']}/>
+          <TextInput label="Username" placeholder="User123" required onChange={e => handleChange("username", e.target.value)} value={fields['username']}/>
           <PasswordInput label="Password" placeholder="Your password" required mt="md" onChange={e => handleChange("password", e.target.value)} value={fields['password']}/>
           <Group justify="space-between" mt="lg">
             <Checkbox label="Remember me" />
           </Group>
-          <Button fullWidth mt="xl" color='orange' onClick={() => dispatch(login(fields['email'], fields['password']))}>
+          <Button fullWidth mt="xl" color='orange' onClick={() => dispatch(login({username: fields['username'], password: fields['password']}))}>
             Sign in
           </Button>
         </Paper>

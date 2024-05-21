@@ -28,11 +28,9 @@ const router = createBrowserRouter([
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
     <MantineProvider theme={createTheme()}>
       <Provider store={store}>
         <RouterProvider router={router}/>
       </Provider>
     </MantineProvider>
-  </React.StrictMode>,
 )

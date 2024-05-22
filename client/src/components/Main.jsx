@@ -21,7 +21,7 @@ export default function Main() {
         <div className='minip'>
             <p>On this platform you can give money to the people!</p>
         </div>  
-        <Link style={{ textDecoration: 'none' }}>
+        <Link style={{ textDecoration: 'none' }} to={"/posts"}>
             <div className='goto'>
                 <img src={arrow} width="50"></img>
                 <p className='myp'>Go check posts!</p>

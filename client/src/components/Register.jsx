@@ -8,11 +8,12 @@ import {
   Container,
   Button,
 } from '@mantine/core';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { register } from '../slices/appSlice.js';
+import { register, setUser } from '../slices/appSlice.js';
 import Header from './Header';
 import classes from '../AuthenticationTitle.module.css';
-
+import Modal from './Modal'
 export default function AuthenticationTitle() {
   const [fields, setFields] = React.useState({
     username: '',
@@ -22,6 +23,7 @@ export default function AuthenticationTitle() {
     secondName: '',
     city: ''
   });
+  const navigate = useNavigate();
   
   const dispatch = useDispatch();
   const { status, error } = useSelector(state => state.app);
@@ -33,12 +35,19 @@ export default function AuthenticationTitle() {
     });
   };
 
-  const handleRegister = () => {
-    dispatch(register(fields));
+  const handleRegister = async () => {
+    const response = await dispatch(register(fields));
+    console.log(response);
+    if(response.type === 'app/register/fulfilled'){
+      navigate("/");
+      dispatch(setUser(fields["username"]));
+    }
+    
   };
 
   return (
     <>
+      <Modal></Modal>
       <Header />
       <Container size={420} my={40}>
         <Title ta="center" className={classes.title}>

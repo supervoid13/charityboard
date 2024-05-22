@@ -2,6 +2,7 @@ import instance from '../axios.js';
 
 export default class AuthService {
   static async login(username, password) {
+    console.log(username, password);
     return instance.post('auth/login', { username, password })
       .then(response => response.data);
   }
@@ -10,4 +11,6 @@ export default class AuthService {
     return instance.post('auth/register', { username, password, email, firstName, secondName, city })
       .then(response => response.data);
   }
+
+
 }

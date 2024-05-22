@@ -10,18 +10,20 @@ import {
     Group,
     Button,
   } from '@mantine/core';
+  import Modal from './Modal'
   import React from 'react';
-  import { useSelector, useDispatch } from 'react-redux'
-  import {login} from '../slices/appSlice.js';
-  import { Outlet, Link } from "react-router-dom";
+  import { useDispatch } from 'react-redux'
+  import {login, setUser} from '../slices/appSlice.js';
+  import { Link, useNavigate } from "react-router-dom";
   import Header from './Header';
   import classes from '../AuthenticationTitle.module.css';
 
   export default function AuthenticationTitle() {
     const dispatch = useDispatch()
+    const navigate = useNavigate();
 
     const [fields, setFields] = React.useState({});
-
+    
 
     const handleChange = (field, value) => {
         setFields({
@@ -29,10 +31,19 @@ import {
           [field]: value
         })
       }
-
+      const handleLogin = async () => {
+        const response = await dispatch(login(fields));
+        console.log(response);
+        if(response.type === 'app/login/fulfilled'){
+          navigate("/");
+          dispatch(setUser(fields["username"]));
+        }
+        
+      };
 
     return (
       <> 
+      <Modal></Modal>
       <Header></Header>
       <Container size={420} my={40}>
         <Title ta="center" className={classes.title}>
@@ -53,7 +64,7 @@ import {
           <Group justify="space-between" mt="lg">
             <Checkbox label="Remember me" />
           </Group>
-          <Button fullWidth mt="xl" color='orange' onClick={() => dispatch(login({username: fields['username'], password: fields['password']}))}>
+          <Button fullWidth mt="xl" color='orange' onClick={handleLogin}>
             Sign in
           </Button>
         </Paper>

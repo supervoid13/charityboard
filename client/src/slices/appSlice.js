@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import AuthService from '../services/auth.js';
-
+import PostsService from "../services/posts.js";
 export const login = createAsyncThunk(
   'app/login',
   async ({ username, password }, { rejectWithValue }) => {
@@ -28,13 +28,29 @@ export const register = createAsyncThunk(
   }
 );
 
+export const post = createAsyncThunk(
+  "app/post",
+  async ({title, content, category, avatar, goal, accountDetails}, {rejectWithValue}) => {
+    try{
+      console.log("bagi");
+      console.log(localStorage.getItem("token"));
+      const response = await PostsService.postpost(title, content, category, avatar, goal, accountDetails);
+      return response;
+    }catch(err){
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
+
 export const appSlice = createSlice({
   name: 'app',
   initialState: {
     isLoggedIn: false,
-    user: {},
+    user: "",
     status: 'idle',
     error: null,
+    modal: false
   },
   reducers: {
     setAuth: (state, action) => {
@@ -43,6 +59,12 @@ export const appSlice = createSlice({
     setUser: (state, action) => {
       state.user = action.payload;
     },
+    openModal: (state) => { 
+      state.modal = true;
+    },
+    closeModal: (state) => { 
+      state.modal = false;
+    }
   },
   extraReducers: builder => {
     builder
@@ -51,7 +73,8 @@ export const appSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.isLoggedIn = true;
-        state.user = action.payload.user;
+        console.log(action);
+        state.user = action.meta.username;
         state.status = 'succeeded';
         state.error = null;
       })
@@ -64,16 +87,28 @@ export const appSlice = createSlice({
       })
       .addCase(register.fulfilled, (state, action) => {
         state.isLoggedIn = true;
-        state.user = action.payload.user;
+        state.user = action.meta.username;
         state.status = 'succeeded';
         state.error = null;
       })
       .addCase(register.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload || 'Failed to register';
+      })
+      .addCase(post.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(post.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.error = null;
+      })
+      .addCase(post.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
       });
+      
   }
 });
 
 export default appSlice.reducer;
-export const { setAuth, setUser } = appSlice.actions;
+export const { setAuth, setUser, openModal, closeModal } = appSlice.actions;

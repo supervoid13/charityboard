@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import '@mantine/core/styles.css';
-import { useSelector } from 'react-redux';
 import { Provider } from 'react-redux'
 import {store} from './store'
 import AuthenticationTitle from './components/Auth.jsx'
@@ -14,6 +13,7 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import { createTheme, MantineProvider } from '@mantine/core';
+import NewPost from './components/newPost.jsx';
 
 
 const router = createBrowserRouter([
@@ -30,9 +30,14 @@ const router = createBrowserRouter([
     element: <Register/>
   },
   {
+    path: '/posts/:postId',
+    element: <NewPost/>
+  },
+  {
     path: '/posts',
-    element: <Posts/>
-  }
+    element: <Posts/>,
+  },
+  
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

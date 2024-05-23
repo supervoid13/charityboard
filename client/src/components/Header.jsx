@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from '../assets/Artboard 1@3x.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { Outlet, Link } from "react-router-dom";
@@ -14,7 +14,7 @@ export default function Header() {
     const [content, setContent] = useState('');
     const [category, setCategory] = useState(1);
     const [file, setFile] = useState(null);
-    const [imgurUrl, setImgurUrl] = useState(null);
+    const [imgurUrl, setImgurUrl] = useState("");
     const [goal, setGoal] = useState(0);
     const [details, setDetails] = useState('');
     const dispatch = useDispatch();
@@ -39,12 +39,9 @@ export default function Header() {
             });
 
             const imgUrl = response.data.data.link;
-            setImgurUrl(imgUrl);
-
-            // Here you can send the image URL along with other form data to your backend
-            // For demonstration, just logging the URL
+            
             console.log('Uploaded Image URL:', imgUrl);
-
+            return imgUrl;
             // Close the modal after upload
         } catch (error) {
             console.error('Error uploading to Imgur:', error);
@@ -52,10 +49,11 @@ export default function Header() {
         }
     };
     const handlePost = async () => {
-        handleUpload();
-        
-        const response = await dispatch(post(title, content, category, imgurUrl, goal, details));
-
+        const res = await handleUpload(); 
+        setImgurUrl(res); 
+        console.log(res);
+        const response = await dispatch(post({ title: title, content: content, category: category, avatar: res, goal: goal, accountDetails: details }));
+        console.log(typeof goal);
         console.log(response);
         close();
     }

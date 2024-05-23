@@ -18,7 +18,6 @@ export const register = createAsyncThunk(
   'app/register',
   async ({ username, password, email, firstName, secondName, city }, { rejectWithValue }) => {
     try {
-      console.log(username, password, email, firstName, secondName, city);
       const response = await AuthService.register(username, password, email, firstName, secondName, city);
       localStorage.setItem("token", response.token); 
       return response;
@@ -32,7 +31,6 @@ export const post = createAsyncThunk(
   "app/post",
   async ({title, content, category, avatar, goal, accountDetails}, {rejectWithValue}) => {
     try{
-      console.log("bagi");
       console.log(localStorage.getItem("token"));
       const response = await PostsService.postpost(title, content, category, avatar, goal, accountDetails);
       return response;
@@ -41,8 +39,30 @@ export const post = createAsyncThunk(
     }
   }
 );
-
-
+export const getposts = createAsyncThunk(
+  "app/getposts",
+  async (_, {rejectWithValue}) => {
+    try{
+      console.log(localStorage.getItem("token"));
+      const response = await PostsService.getPosts();
+      return response;
+    }catch(err){
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+export const getpost = createAsyncThunk(
+  "app/getpost",
+  async ({id}, {rejectWithValue}) => {
+    try{
+      console.log(localStorage.getItem("token"));
+      const response = await PostsService.getPost({id});
+      return response;
+    }catch(err){
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 export const appSlice = createSlice({
   name: 'app',
   initialState: {
@@ -103,6 +123,28 @@ export const appSlice = createSlice({
         state.error = null;
       })
       .addCase(post.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      })
+      .addCase(getposts.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(getposts.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.error = null;
+      })
+      .addCase(getposts.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      })
+      .addCase(getpost.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(getpost.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.error = null;
+      })
+      .addCase(getpost.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload;
       });

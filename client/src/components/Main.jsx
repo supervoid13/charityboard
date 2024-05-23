@@ -19,7 +19,7 @@ export default function Main() {
             <p >Help people with us!</p>
         </div>
         <div className='minip'>
-            <p>On this platform you can give money to the people!</p>
+            <p>Charity Boad.</p>
         </div>  
         <Link style={{ textDecoration: 'none' }} to={"/posts"}>
             <div className='goto'>

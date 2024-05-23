@@ -166,3 +166,38 @@ body {
     align-items: flex-end;
     justify-content: end;
   }
+  .cardof{
+    margin-top: 5rem;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    width: 90%; 
+  }
+.text-of-card{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.header-of-card{
+  background-color: #fc7e17;
+  margin-left: 3rem;
+  color: white;
+  font-size: 100px;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+}
+.main-text-card{
+  display: flex;
+  margin-top: 2rem;
+  margin-left: 3rem;
+  font-size: 20px;
+}
+.help-tel{
+  display: flex;
+  margin-left: 3rem;
+  font-size: 40px;
+  flex-direction: column;
+}
